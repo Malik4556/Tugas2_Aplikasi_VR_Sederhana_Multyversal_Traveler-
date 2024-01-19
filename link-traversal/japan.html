@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WORLD TAK TERDUGA</title>
+    <script src="../../../dist/aframe-master.js"></script>
+    <script src="js/components/aframe-tooltip-component.js"></script>
+    <script src="js/components/camera-position.js"></script>
+    <script src="js/components/link-controls.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene
+      fog="color: #241417; near: 0; far: 30;"
+      raycaster="far: 100; objects: [link];"
+      cursor="rayOrigin: mouse"
+      camera-position environment="preset: japan">
+      <a-assets>
+        <img id="thumbIndex" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/index.png">
+        <img id="thumbEarth" crossOrigin="anonymous" src="images/earth.png">
+      </a-assets>
+      <a-link href="index.html" title="HOME" font="monoid" position="-2 1.5 -1.5" image="#thumbIndex"></a-link>
+      <a-link href="earth.html" title="LUAR BUMI" font="monoid" position="0.80 2.5 -3.5" image="#thumbEarth"></a-link>
+      <a-entity light="type: point; color: #f4f4f4; intensity: 0.4; distance: 0" position="0 2 0"></a-entity>
+      <a-entity id="leftHand" link-controls="hand: left"></a-entity>
+      <a-entity id="rightHand" link-controls="hand: right"></a-entity>
+    </a-scene>
+  </body>
+</html>

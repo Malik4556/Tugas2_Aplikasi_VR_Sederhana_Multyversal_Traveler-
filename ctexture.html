@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M59+)" data-expires="2017-07-28" content="ArFv1ZeTwzkhjNE00uAE+XtiQB41fwqG/TqlFMLrepd9sforQSvQE/tgfIbUMYNuNre4QR1k4/z8xp2mV3dbhwwAAABeeyJvcmlnaW4iOiJodHRwczovL2FmcmFtZS5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVlIxLjEiLCJleHBpcnkiOjE1MDEyMTcwMDIsImlzU3ViZG9tYWluIjp0cnVlfQ==">
+  <meta charset="utf-8">
+  <script src="../../../dist/aframe-master.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@4.1.2/dist/aframe-event-set-component.min.js"></script>
+  <script src="js/components/aframe-tooltip-component.js"></script>
+  <script src="js/components/camera-position.js"></script>
+  <script src="js/components/link-controls.js"></script>
+</head>
+<body>
+  <a-scene background="color: #FBE0D8"
+            fog="color: #241417; near: 0; far: 30;"
+            raycaster="far: 100; objects: [link];"
+            cursor="rayOrigin: mouse"
+            camera-position
+            environment="preset: egypt">
+    
+    <a-assets>
+      <img id="thumbIndex" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/index.png">
+      <audio id="blip1" src="https://aframe.io/aframe/examples/showcase/anime-UI/audio/321103__nsstudios__blip1.wav"></audio>
+      <audio id="blip2" src="https://aframe.io/aframe/examples/showcase/anime-UI/audio/321104__nsstudios__blip2.wav"></audio>
+      
+      <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+      <a-mixin id="hoverColor1" event-set__mouseenter="material.color: #CC435F"></a-mixin>
+      <a-mixin id="hoverColor2" event-set__mouseenter="material.color:#FF004D"></a-mixin>
+      <a-mixin id="selectColor1" event-set__click="material.color: #876A96"></a-mixin>
+      <a-mixin id="selectColor2" event-set__click="material.color: #8EA906C"></a-mixin>
+      <a-mixin id="leaveColor1" event-set__mouseleave="material.color: #9DE0AD"></a-mixin>
+      <a-mixin id="leaveColor2" event-set__mouseleave="material.color: #7ED7C1"></a-mixin>
+      <a-mixin id="red" material="color: #F35F5F"></a-mixin>
+      <a-mixin id="green" material="color: #9DE0AD"></a-mixin>
+      <a-mixin id="blue" material="color: #36A3EB"></a-mixin>
+      <a-mixin id="yellow" material="color: #F1EA65"></a-mixin> 
+    </a-assets>
+
+    <a-link href="index.html" title="INDEX" font="monoid" position="0.0 4.5 0" image="#thumbIndex"></a-link>
+    <a-entity light="type: point; color: #f4f4f4; intensity: 0.4; distance: 0" position="0 2 0"></a-entity>
+    <a-entity id="leftHand" link-controls="hand: left"></a-entity>
+    <a-entity id="rightHand" link-controls="hand: right"></a-entity>
+
+    <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .intersectable"></a-entity>
+
+    <!-- Kamera -->
+    <a-entity position="0 .6 4">
+      <a-camera>
+        <a-entity raycaster="far: 30; objects: .intersectable" material="color: #283644; shader: flat" position="0 0 -0.75"></a-entity>
+      </a-camera>
+    </a-entity>
+
+    <a-entity position="0 1 0">
+      <a-entity id="foregroundCube1" class="intersectable" mixin="green cube hoverColor1 selectColor1 leaveColor1" 
+                sound__1="on: click; src: #blip1" sound__2="on: mouseenter; src: #blip2" 
+                animation__click="startEvents: click; property: rotation; to: 0 360 0; easing: linear; dur: 2000">
+      </a-entity>
+    </a-entity>
+
+    <a-entity position="0 2.25 0">
+      <a-entity id="foregroundCube2" class="intersectable" mixin="green cube hoverColor2 selectColor2 leaveColor2" 
+                sound__1="on: click; src: #blip1" sound__2="on: mouseenter; src: #blip2" 
+                animation__click="startEvents: click; property: rotation; to: 0 360 0; easing: linear; dur: 2000">
+      </a-entity>
+    </a-entity>
+
+    <a-entity position="3.5 1 0" rotation="0 45 0">
+      <a-entity id="blueCube" class="intersectable" mixin="blue cube" 
+                animation="startEvents: click; loop: 1; dir: alternate; property: position; from: 0 0 0; to: 15 0 0; dur: 2000">
+      </a-entity>
+    </a-entity>
+
+    <a-entity position="-3.5 1 0" rotation="0 45 0">
+      <a-entity id="foregroundCube3" class="intersectable" mixin="blue cube" 
+                animation="startEvents: click; loop: 1; dir: alternate; property: position; from: 0 0 0; to: 0 0 -15 ; dur: 2000">
+      </a-entity>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
